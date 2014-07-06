@@ -1,0 +1,30 @@
+﻿Build started 2014/07/05 (土) 21:43:35.
+     1>Project "C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\bme2chart\bme2chart.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\bme2chart.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt bme2chart.cpp
+         bme2chart.cpp
+     1>bme2chart.cpp(134): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
+     1>bme2chart.cpp(138): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>bme2chart.cpp(165): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>bme2chart.cpp(272): warning C4018: '<' : signed/unsigned mismatch
+     1>bme2chart.cpp(276): warning C4018: '<' : signed/unsigned mismatch
+     1>bme2chart.cpp(294): warning C4018: '<' : signed/unsigned mismatch
+     1>bme2chart.cpp(298): warning C4018: '<' : signed/unsigned mismatch
+     1>bme2chart.cpp(309): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Release\bme2chart.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\bme2chart.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Release\bme2chart.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Release\bme2chart.lib" /MACHINE:X86 Release\bme2chart.obj
+         Generating code
+         Finished generating code
+         bme2chart.vcxproj -> C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Release\bme2chart.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Release\bme2chart.exe;#1" /manifest Release\bme2chart.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\bme2chart.unsuccessfulbuild".
+         Touching "Release\bme2chart.lastbuildstate".
+     1>Done Building Project "C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\bme2chart\bme2chart.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.51
