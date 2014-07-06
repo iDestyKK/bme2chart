@@ -1,3 +1,12 @@
+/*
+		BME2CHART C++
+		Because Beatmania's clever format can also be in chart
+
+		The purpose of this console application is to convert Beatmania BME files to chart format. It can then be converted to MIDI via chart2mid.
+
+		By: Clara Eleanor Taylor
+*/
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -68,22 +77,26 @@ class Event {
 
 class Key {
 	public:
-		Key(int a, int b) {
+		Key(int a, int b, int c) {
 			tick = a;
 			colour = b;
+			sound = c;
 		}
 
 		Key() {
 			tick = 0;
 			colour = 0;
+			sound = 0;
 		}
 		
 		int getTick() { return tick; }
 		int getColour() { return colour; }
+		int getSound() { return sound; }
 
 	private:
 		int tick;
 		int colour;
+		int sound;
 };
 
 class AUDIO {
@@ -105,6 +118,13 @@ class AUDIO {
 		string attr;
 		string path;
 };
+
+int findSound(vector<AUDIO> sndbk, string ID) {
+	for (int i = 0; i < sndbk.size(); i++)
+		if (ID == sndbk[i].getAttribute())
+			return i;
+	return 0;
+}
 
 int ToReal(string str) {
 	istringstream output;
@@ -186,26 +206,34 @@ int main(int argc, char* argv[]) {
 	ifstream bme;
 
 	if (argc < 2) {
-		cerr << "Usage: bme2chart.exe <input path> <output path>"
+		cerr << "Usage: bme2chart.exe <input path> <output path> <soundbank path>"
 			<< endl
 			<< endl
-			<< "    <output path> is purely optional."
+			<< "    <output path> is purely optional, as well as soundbank path."
 			<< endl
-			<< "    If blank, uses input name + \".chart\" (not affecting the bme!)"
+			<< "    If blank, uses input name + \".chart\" (not affecting the bme!), same with soundbank, only with \".xsd\""
 			<< endl;
 		return 1;
 	}
 
-	string path, opath;
+	string path, opath, spath;
 
 	if (argc == 2) {
 		path = argv[1];
 		opath = string(argv[1]) + ".chart";
+		spath = string(argv[1]) + ".xsd";
 	}
 
 	if (argc == 3) {
 		path = argv[1];
 		opath = argv[2];
+		spath = string(argv[2]) + ".xsd";
+	}
+
+	if (argc == 4) {
+		path = argv[1];
+		opath = argv[2];
+		spath = argv[3];
 	}
 
 	bme.open(path);
@@ -282,6 +310,8 @@ int main(int argc, char* argv[]) {
 	}
 	snctrk_str += "}\n";
 
+	string event_str = "[Events]\n{\n}\n"; //LOL
+
 	string note_str;
 	if (keyboard_mode)
 		note_str = "[ExpertKeyboard]\n";
@@ -297,7 +327,7 @@ int main(int argc, char* argv[]) {
 			Events[i].convertToSegments(breakup);
 			for (int a = 0; a < breakup.size(); a++) {
 				if (breakup[a] != "00") {
-					vkey.push_back(Key(calcTick(Events[i].getMeasure(), resolution, a, Events[i].getEntryCount()), Events[i].getNote(fivekeymode)));
+					vkey.push_back(Key(calcTick(Events[i].getMeasure(), resolution, a, Events[i].getEntryCount()), Events[i].getNote(fivekeymode), findSound(Audio, breakup[a])));
 				}
 			}
 		}
@@ -307,13 +337,21 @@ int main(int argc, char* argv[]) {
 
 	//Scan for Note Data now!
 	for (int i = 0; i < vkey.size(); i++) {
-		note_str += "\t" + ToString(vkey[i].getTick()) + " = N " + ToString(vkey[i].getColour()) + " 0\n";
+		note_str += "\t" + ToString(vkey[i].getTick()) + " = N " + ToString(vkey[i].getColour()) + " 0 " + ToString(vkey[i].getSound()) + "\n";
 	}
 	
 	note_str += "}\n";
 
+	//Write Chart
 	ofstream chart;
 	chart.open(opath);
-	chart << song_str << snctrk_str << note_str;
+	chart << song_str << snctrk_str << event_str << note_str;
 	chart.close();
+
+	//Write Soundbank
+	ofstream sb;
+	sb.open(spath);
+	for (int i = 0; i < Audio.size(); i++)
+		sb << Audio[i].getPath() << endl;
+	sb.close();
 }
