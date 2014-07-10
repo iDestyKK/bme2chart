@@ -1,20 +1,22 @@
-﻿Build started 2014/07/06 (日) 00:36:58.
+﻿Build started 2014/07/10 (木) 18:56:33.
      1>Project "C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\bme2chart\bme2chart.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\bme2chart.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt bme2chart.cpp
          bme2chart.cpp
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(123): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(154): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(158): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(185): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(300): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(304): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(324): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(143): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(174): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(178): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(205): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
      1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(328): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(339): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(354): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(333): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(343): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(345): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(366): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(370): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(381): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\clara\documents\visual studio 2010\projects\bme2chart\bme2chart\bme2chart.cpp(396): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Debug\bme2chart.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\bme2chart.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Debug\bme2chart.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Debug\bme2chart.lib" /MACHINE:X86 Debug\bme2chart.obj
          LINK : C:\Users\Clara\Documents\Visual Studio 2010\Projects\bme2chart\Debug\bme2chart.exe not found or not built by the last incremental link; performing full link
@@ -28,4 +30,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.36
+Time Elapsed 00:00:01.75

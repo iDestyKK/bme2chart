@@ -119,6 +119,26 @@ class AUDIO {
 		string path;
 };
 
+class BPM {
+	public:
+		//Constructors
+		BPM(string a, int b) {
+			attr = a;
+			bpm = b;
+		}
+		BPM() {
+			attr = "";
+			bpm = 0;
+		}
+		
+		//Return thingies...
+		string getAttribute() { return attr; }
+		int getBPM() { return bpm; }
+	private:
+		string attr;
+		int bpm;
+};
+
 int findSound(vector<AUDIO> sndbk, string ID) {
 	for (int i = 0; i < sndbk.size(); i++)
 		if (ID == sndbk[i].getAttribute())
@@ -241,9 +261,11 @@ int main(int argc, char* argv[]) {
 	//Song Data
 	string sname = "", sartist = "", sgenre = "";
 	string line, prtln, bfln, afln, attln, bycol;
+	unsigned int bpmf = 0;
 
 	vector<Event> Events;
 	vector<AUDIO> Audio;
+	vector<BPM> AdvBPM;
 
 	while (getline(bme,line)) {
 		if (line.length() == 0)
@@ -257,13 +279,18 @@ int main(int argc, char* argv[]) {
 			afln  = line.substr(line.find(' ') + 1, line.length() - (line.find(' ') + 1));
 			if (prtln == "WAV")
 				Audio.push_back(AUDIO(attln, bycol));
+			else if (bfln == "BPM")
+				bpmf = ToReal(afln);
+			else if (prtln == "BPM") {
+				AdvBPM.push_back(BPM(attln, ToReal(bycol)));
+			}
 			else if (bfln == "TITLE")
 				sname = afln;
 			else if (bfln == "ARTIST")
 				sartist = afln;
 			else if (bfln == "GENRE")
 				sgenre = afln;
-			else if (bfln == "PLAYLEVEL" || bfln == "BPM" || bfln == "PLAYER") {
+			else if (bfln == "PLAYLEVEL" || bfln == "PLAYER") {
 				//Do nothing
 			} else
 				//The rest must be numbers.
@@ -290,20 +317,35 @@ int main(int argc, char* argv[]) {
 	song_str += "\tPreviewEnd = 0.00\n";
 	song_str += "\tGenre = \"" + sgenre + "\"\n";
 	song_str += "\tMediaType = \"cd\"\n";
-	song_str += "\tMusicStream = \"song.ogg\"\n";
+	song_str += "\tMusicStream = \"01.ogg\"\n";
 	song_str += "}\n";
 
 	//Loop through all of the events and export
 	string snctrk_str = "[SyncTrack]\n";
 	snctrk_str += "{\n";
 	snctrk_str += "\t0 = TS 4\n";
+	snctrk_str += "\t0 = B " + ToString(bpmf * 1000) + "\n";
 	for (int i = 0; i < Events.size(); i++) {
 		if (Events[i].getType() == 3) {
+			//Regular BPM Change
 			vector<string> breakup;
 			Events[i].convertToSegments(breakup);
 			for (int a = 0; a < breakup.size(); a++) {
 				if (breakup[a] != "00") {
 					snctrk_str += "\t" + ToString(calcTick(Events[i].getMeasure(), resolution, a, Events[i].getEntryCount())) + " = B " + ToString(HexToInt(breakup[a]) * 1000) + "\n";
+				}
+			}
+		}
+		if (Events[i].getType() == 8) {
+			//Advanced BPM Change
+			vector<string> breakup;
+			Events[i].convertToSegments(breakup);
+			for (int a = 0; a < breakup.size(); a++) {
+				if (breakup[a] != "00") {
+					for (int b = 0; b < AdvBPM.size(); b++)
+						if (breakup[a] == AdvBPM[b].getAttribute())
+							snctrk_str += "\t" + ToString(calcTick(Events[i].getMeasure(), resolution, a, Events[i].getEntryCount())) + " = B " + ToString(AdvBPM[b].getBPM() * 1000) + "\n";
+					//If you write the BME file correctly, it is guaranteed to spit something out here, period.
 				}
 			}
 		}
