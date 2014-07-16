@@ -42,7 +42,7 @@ class Event {
 			}
 		}
 		bool getIsNote() {
-			return ((type >= 11 && type <= 16) || type == 18 || type == 19);
+			return ((type >= 11 && type <= 16) || type == 18 || type == 19 || type == 1);
 		}
 		int getNote(bool fivekeymode) {
 			switch (type) {
@@ -66,6 +66,7 @@ class Event {
 						return 0;
 					else
 						return 7;
+				case  1: return 8; //Autoplay
 				default: return -1;
 			}
 		}
@@ -379,7 +380,14 @@ int main(int argc, char* argv[]) {
 
 	//Scan for Note Data now!
 	for (int i = 0; i < vkey.size(); i++) {
-		note_str += "\t" + ToString(vkey[i].getTick()) + " = N " + ToString(vkey[i].getColour()) + " 0 " + ToString(vkey[i].getSound()) + "\n";
+		if (vkey[i].getColour() == 8) {
+			//Autoplay
+			if (vkey[i].getSound() != 0) { //The first sound is always the BGM, which is handled by RX rather than this, so we will simply ignore it.
+				note_str += "\t" + ToString(vkey[i].getTick()) + " = A " + ToString(vkey[i].getSound()) + "\n";
+			}
+		}
+		else
+			note_str += "\t" + ToString(vkey[i].getTick()) + " = N " + ToString(vkey[i].getColour()) + " 0 " + ToString(vkey[i].getSound()) + "\n";
 	}
 	
 	note_str += "}\n";
